@@ -1,0 +1,425 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-gutter: stable;
+  scrollbar-color: #474747 #272727;
+  scrollbar-width: thin;
+}
+
+body {
+  background: #171717;
+  color: #f1f1f1;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+
+p {
+  margin: 0;
+  margin-block-end: 16px;
+  font-size: 14px;
+}
+
+a {
+  color: #f1f1f1;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+input,
+textarea {
+  border: none;
+  border-radius: 2px;
+}
+
+/* ---------------------- Navbar -------------------- */
+nav {
+  text-transform: uppercase;
+  display: flex;
+  margin: 0 auto;
+  max-width: 1080px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+}
+
+.navbar {
+  display: flex;
+  gap: 24px;
+  font-size: 14px;
+}
+
+.navbar li {
+  opacity: 0.6;
+  border-bottom: 2px solid transparent;
+  transition: all 250ms ease-in;
+}
+
+.navbar li.selected {
+  border-bottom: 2px solid white;
+  opacity: 1;
+}
+
+.navbar li:hover {
+  cursor: pointer;
+}
+
+main,
+section {
+  min-height: 55vh;
+  margin-block: 48px;
+}
+
+.hero {
+  display: flex;
+  width: min(100%, 780px);
+  height: max(auto, 650px);
+  margin: 0 auto;
+}
+
+/* ---------------- Comisiones --------------- */
+.comisiones,
+.contacto {
+  margin: 0 auto;
+  max-width: 1080px;
+}
+
+.comisiones img,
+.contacto img {
+  display: block;
+  margin: 0 auto;
+  margin-block-end: 48px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block-start: 32px;
+  margin-block-end: 18px;
+}
+
+table,
+th,
+td {
+  border: 1px solid #f1f1f1;
+  font-size: 14px;
+  text-align: left;
+}
+
+
+th {
+  background-color: #f1f1f1;
+  color: black;
+  padding: 6px;
+}
+
+td {
+  padding: 4px;
+}
+
+/* ----------------- Contacto ----------------- */
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.form,
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  margin-block: 22px;
+}
+
+.form-field {
+  padding-block-end: 16px;
+  flex-grow: 1;
+}
+
+.form-field input,
+.form-field textarea {
+  padding: 12px 8px;
+}
+
+.form-field label {
+  font-size: 14px;
+
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* -------------------- Footer ------------------- */
+footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-block: 18px;
+  background-color: #171717;
+}
+
+.form-suscribirse {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  input {
+    padding: 10px;
+  }
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: space-between;
+
+}
+
+.social-media-icons {
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+}
+
+.btn {
+  display: block;
+  text-transform: uppercase;
+  border: none;
+  padding: 10px 12px;
+  font-weight: bold;
+}
+
+.copyr {
+  opacity: 0.7;
+  font-size: 10px;
+}
+
+
+/* ------------------- Galeria ------------------ */
+.galeria ul {
+  display: flex;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-block: 48px;
+  justify-content: space-evenly;
+
+  li {
+    position: relative;
+  }
+
+  li>img {
+    max-height: 225px;
+    opacity: 0.3;
+    border-radius: 5%;
+    transition: all 250ms ease-in-out;
+  }
+
+  li>span {
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+    z-index: 10;
+    animation-name: text-to-bottom-out;
+    animation-duration: 150ms;
+  }
+
+  li:hover {
+    cursor: pointer;
+  }
+
+  li:hover>img {
+    opacity: 0.8;
+    scale: 1.05;
+  }
+
+  li:hover>span {
+    padding: 8px;
+    font-size: 19px;
+    animation-name: text-to-bottom-in;
+    animation-duration: 150ms;
+    animation-fill-mode: forwards;
+    opacity: 0.9;
+  }
+}
+
+#categorias-galeria li.selected>span {
+  padding: 8px;
+  font-size: 19px;
+  animation-name: text-to-bottom-in;
+  animation-duration: 150ms;
+  animation-fill-mode: forwards;
+  opacity: 0.9;
+}
+
+#categorias-galeria li.selected>img {
+  opacity: 0.8;
+  scale: 1.05;
+}
+
+.galeria-grid {
+  max-width: 1080px;
+  margin: 56px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+.galeria-grid img {
+  width: 100%;
+  border-radius: 3px;
+}
+
+.galeria-grid img:hover {
+  cursor: zoom-in;
+}
+
+.pantalla-grande--fondo {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background-color: #000000ee;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.pantalla-grande--insertables {
+  margin: 10vh 0 20vh 0;
+
+  img {
+    display: block;
+    margin: 0 auto;
+    max-height: 70vh;
+    position: relative;
+  }
+}
+
+.pantalla-grande--insertables span {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.85;
+
+  &:first-of-type {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+
+  &:last-of-type {
+    font-size: 11px;
+    opacity: 0.97;
+  }
+}
+
+.pantalla-grande---contenedor {
+  position: relative;
+  height: min-content;
+  width: min-content;
+  margin: 0 auto;
+}
+
+.pantalla-grande--icono {
+  position: absolute;
+  opacity: 0.5;
+  transition: all 150ms ease-in-out;
+
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    scale: 1.08;
+  }
+}
+
+.pantalla-grande--icono__cerrar {
+  top: 0px;
+  right: -64px;
+}
+
+.pantalla-grande--icono__izquierda {
+  bottom: 50%;
+  left: -64px;
+}
+
+.pantalla-grande--icono__derecha {
+  bottom: 50%;
+  right: -64px;
+}
+
+/* ------------------- Animations ----------------- */
+@keyframes text-to-bottom-in {
+  from {
+    top: 50%;
+  }
+
+  to {
+    top: 100%;
+  }
+}
+
+@keyframes text-to-bottom-out {
+  from {
+    top: 100%;
+  }
+
+  to {
+    top: 50%;
+  }
+}
+
+@keyframes border-bottom {
+  from {
+    border-bottom: 2px solid transparent;
+  }
+
+  to {
+    border-bottom: 2px solid #f1f1f1;
+  }
+}
+
+/* Utils */
+.hidden {
+  display: none;
+}
+
+.selected {
+  font-weight: 500;
+}
+
+.note {
+  font-size: 12px;
+  opacity: 0.8;
+}

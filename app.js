@@ -1,4 +1,7 @@
 const $btnsNavbar = document.querySelectorAll(".navbar li")
+const $btnMenuMovil = document.querySelector(".btn-menu-movil")
+const $btnMenuMovilCerrar = document.querySelector(".btn-menu-movil--cerrar")
+const $menuMovil = document.querySelector(".menu-movil--contenedor")
 const $categoriasGaleria = document.querySelectorAll("#categorias-galeria li")
 const $galeriasGrid = document.querySelectorAll(".galeria-grid")
 const $pantallaGrande = document.querySelector("#pantalla-grande")
@@ -14,6 +17,9 @@ const sections = [$home, $galeria, $comisiones, $contacto]
 $btnsNavbar.forEach((btn) => {
   btn.addEventListener('click', (e) => handleBtnNav(e))
 })
+
+$btnMenuMovil.addEventListener("click", (e) => handleBtnMenuMovil(e))
+$btnMenuMovilCerrar.addEventListener("click", (e)=>handleBtnMenuMovilCerrar(e))
 
 $categoriasGaleria.forEach((categoria) => {
   categoria.addEventListener('click', (e) => handleCategoriasGaleria(e))
@@ -39,10 +45,22 @@ function handleBtnNav(e) {
   })
 
   sections.forEach((section) => {
-    section.id == e.target.innerHTML.toLowerCase() ?
-      section.classList.remove("hidden") :
+    if (section.id == e.target.innerHTML.toLowerCase()){
+      section.classList.remove("hidden")
+      $menuMovil.classList.add("hidden")
+    }
+    else {
       section.classList.add("hidden")
+    }
   })
+}
+
+function handleBtnMenuMovil(e) {
+  $menuMovil.classList.remove("hidden")
+}
+
+function handleBtnMenuMovilCerrar(e){
+  $menuMovil.classList.add("hidden")
 }
 
 function handleCategoriasGaleria(e) {
@@ -64,31 +82,38 @@ function handleCategoriasGaleria(e) {
   })
 }
 
-function handleBigImg(e){
+function handleBigImg(e) {
   if (e.target.tagName != "IMG") return
 
   $pantallaGrande.classList.remove("hidden")
 
   const espacioInsertable = $pantallaGrande.querySelector(".pantalla-grande--insertables")
-  espacioInsertable.innerHTML +=  `<img src=${e.target.src}>`
+  espacioInsertable.innerHTML += `<img src=${e.target.src}>`
 
   const arrInfo = e.target.alt.split(".")
 
-  arrInfo.forEach((info)=> {
+  const contenedorRenglon = document.createElement("div")
+  contenedorRenglon.classList.add("hidden", "pantalla-grande--insertables__texto")
+  arrInfo.forEach((info) => {
+    if (info == "") return
     const renglon = document.createElement("span")
     renglon.innerText = info
-    espacioInsertable.appendChild(renglon)
+    contenedorRenglon.appendChild(renglon)
   })
 
-  $pantallaGrande.addEventListener('click', (e)=>{
-    if (e.target.tagName == "DIV" || e.target.classList.contains("pantalla-grande--icono__cerrar") || e.target.parentElement.classList.contains("pantalla-grande--icono__cerrar")){
+  if (contenedorRenglon.innerHTML != "") espacioInsertable.appendChild(contenedorRenglon)
+
+  $pantallaGrande.addEventListener('click', (e) => {
+    if (e.target.tagName == "DIV" || e.target.classList.contains("pantalla-grande--icono__cerrar") || e.target.parentElement.classList.contains("pantalla-grande--icono__cerrar")) {
       $pantallaGrande.classList.add("hidden")
       espacioInsertable.innerHTML = ""
     }
-    else  if (e.target.classList.contains("pantalla-grande--icono__derecha") || e.target.parentElement.classList.contains("pantalla-grande--icono__derecha")){
-      console.log("derehca--")
-    } else {
-      console.log("izquierda")
+  })
+  $pantallaGrande.addEventListener('mouseover', (e) => {
+    if (e.target.tagName == "IMG") {
+      contenedorRenglon.classList.remove("hidden")
+    } else if (e.target.classList.contains("pantalla-grande--fondo")) {
+      contenedorRenglon.classList.add("hidden")
     }
   })
 }

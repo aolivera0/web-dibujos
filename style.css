@@ -60,14 +60,54 @@ nav {
   padding: 12px;
 }
 
-.navbar {
-  display: flex;
-  gap: 24px;
-  font-size: 14px;
+.btn-menu-movil {
+  font-size: 24px;
+  background-color: transparent;
+  color: white;
+  border: none;
 }
 
+.btn-menu-movil:hover {
+  cursor: pointer;
+}
+
+.menu-movil--contenedor {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 48px 0 0;
+  z-index: 11;
+  background-color: #171717;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  .btn-menu-movil--cerrar {
+   font-size: 24px; 
+  }
+  .btn-menu-movil--cerrar:hover {
+    cursor: pointer;
+  }
+}
+
+.navbar.menu-movil {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  width: min-content;
+  
+  li {
+    font-size: 36px;
+    opacity: 1;
+  }
+  
+}
+
+
 .navbar li {
-  opacity: 0.6;
+  opacity: 0.5;
   border-bottom: 2px solid transparent;
   transition: all 250ms ease-in;
 }
@@ -81,10 +121,35 @@ nav {
   cursor: pointer;
 }
 
+.navbar {
+  display: none;
+}
+@media (min-width: 644px) {
+  .navbar {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+  }
+  .menu-movil--contenedor {
+    display: none;
+  }
+  .btn-menu-movil, .navbar.menu-movil {
+    display: none;
+  }
+}
+
 main,
 section {
   min-height: 55vh;
   margin-block: 48px;
+
+  transition: all 150ms ease-in;
+  transition-behavior: allow-discrete;
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
 }
 
 .hero {
@@ -226,7 +291,7 @@ footer {
 /* ------------------- Galeria ------------------ */
 .galeria ul {
   display: flex;
-  max-width: 1080px;
+  max-width: 920px;
   margin: 0 auto;
   padding-block: 48px;
   justify-content: space-evenly;
@@ -236,8 +301,12 @@ footer {
   }
 
   li>img {
-    max-height: 225px;
-    opacity: 0.3;
+    height: 100%;
+    width: 156px;
+    object-fit: cover;
+    object-position: center;
+    vertical-align: middle;
+    opacity: 0.25;
     border-radius: 5%;
     transition: all 250ms ease-in-out;
   }
@@ -292,14 +361,71 @@ footer {
 .galeria-grid {
   max-width: 1080px;
   margin: 56px auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  transition: all 150ms ease-in-out;
+  transition-behavior: allow-discrete;
+  opacity: 1;
+  scale: 1;
+
+  @starting-style {
+    /* <-- and this line */
+    opacity: 0;
+
+  }
 }
 
-.galeria-grid img {
-  width: 100%;
-  border-radius: 3px;
+.galeria-grid--columna {
+  flex: 25%;
+  max-height: 25%;
+  padding: 0 4px;
+
+  transition: all 200ms ease-in;
+  transition-behavior: allow-discrete;
+  opacity: 1;
+  scale: 1;
+
+  &:nth-of-type(2) {
+    transition-delay: 150ms;
+  }
+
+  &:nth-of-type(3) {
+    transition-delay: 250ms;
+  }
+
+    &:last-of-type {
+    transition-delay: 350ms;
+  }
+
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.8;
+  }
+
+  img {
+    width: 100%;
+    margin-top: 8px;
+    vertical-align: middle;
+    border-radius: 2px;
+  }
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media (max-width: 800px) {
+  .galeria-grid--columna {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  .galeria-grid--columna {
+    flex: 100%;
+    max-width: 100%;
+  }
 }
 
 .galeria-grid img:hover {
@@ -314,41 +440,64 @@ footer {
   top: 0;
   left: 0;
   z-index: 10;
+  display: grid;
+  place-content: center;
+
+  transition: all 100ms ease-in;
+  transition-behavior: allow-discrete;
+  opacity: 1;
+  scale: 1;
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.75;
+  }
 }
 
 .pantalla-grande--insertables {
-  margin: 10vh 0 20vh 0;
+  background-color: aquamarine;
+  height: 100%;
 
   img {
     display: block;
     margin: 0 auto;
-    max-height: 70vh;
+    max-height: 96vh;
     position: relative;
   }
 }
 
-.pantalla-grande--insertables span {
-  display: block;
-  text-align: center;
-  font-size: 12px;
-  opacity: 0.85;
+.pantalla-grande--insertables__texto {
+  background-color: #000000c8;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  position: absolute;
+  bottom: 0;
+  padding: 6px 0 4px 4px;
+  transition: all 250ms ease-in-out;
+  transition-behavior: allow-discrete;
+  opacity: 1;
+
+  @starting-style {
+    /* <-- and this line */
+    opacity: 0;
+  }
+}
+
+pantalla-grande--insertables__texto span {
+  font-size: 10px;
+
+
 
   &:first-of-type {
     font-size: 14px;
-    margin-top: 12px;
-  }
-
-  &:last-of-type {
-    font-size: 11px;
-    opacity: 0.97;
   }
 }
 
 .pantalla-grande---contenedor {
   position: relative;
-  height: min-content;
-  width: min-content;
-  margin: 0 auto;
+  margin: 2vh 0;
 }
 
 .pantalla-grande--icono {
@@ -365,17 +514,7 @@ footer {
 }
 
 .pantalla-grande--icono__cerrar {
-  top: 0px;
-  right: -64px;
-}
-
-.pantalla-grande--icono__izquierda {
-  bottom: 50%;
-  left: -64px;
-}
-
-.pantalla-grande--icono__derecha {
-  bottom: 50%;
+  top: 2vh;
   right: -64px;
 }
 
@@ -413,6 +552,8 @@ footer {
 /* Utils */
 .hidden {
   display: none;
+  opacity: 0;
+  scale: 1;
 }
 
 .selected {

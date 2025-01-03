@@ -19,10 +19,13 @@ $btnsNavbar.forEach((btn) => {
 })
 
 $btnMenuMovil.addEventListener("click", (e) => handleBtnMenuMovil(e))
-$btnMenuMovilCerrar.addEventListener("click", (e)=>handleBtnMenuMovilCerrar(e))
+$btnMenuMovilCerrar.addEventListener("click", (e) => handleBtnMenuMovilCerrar(e))
 
 $categoriasGaleria.forEach((categoria) => {
-  categoria.addEventListener('click', (e) => handleCategoriasGaleria(e))
+  categoria.addEventListener('click', (e) =>
+  {
+    handleCategoriasGaleria(e)
+  })
 })
 
 $galeriasGrid.forEach((galeria) => {
@@ -45,7 +48,7 @@ function handleBtnNav(e) {
   })
 
   sections.forEach((section) => {
-    if (section.id == e.target.innerHTML.toLowerCase()){
+    if (section.id == e.target.innerHTML.toLowerCase()) {
       section.classList.remove("hidden")
       $menuMovil.classList.add("hidden")
     }
@@ -56,11 +59,17 @@ function handleBtnNav(e) {
 }
 
 function handleBtnMenuMovil(e) {
+  $menuMovil.classList.remove("slide-out")
   $menuMovil.classList.remove("hidden")
+  $menuMovil.classList.add("slide-in")
 }
 
-function handleBtnMenuMovilCerrar(e){
-  $menuMovil.classList.add("hidden")
+function handleBtnMenuMovilCerrar(e) {
+  $menuMovil.classList.remove("slide-in")
+  $menuMovil.classList.add("slide-out")
+  $menuMovil.addEventListener("animationend", ()=>{
+    $menuMovil.classList.add("hidden")
+  }, {once: true})
 }
 
 function handleCategoriasGaleria(e) {
@@ -80,6 +89,12 @@ function handleCategoriasGaleria(e) {
       categoria.classList.remove("selected")
     }
   })
+
+document.querySelector("#categorias-galeria li.selected") ? document.querySelector(".jump").scrollIntoView({behavior:"smooth"}) : ""
+}
+
+function scrollToSection(){
+  document.querySelector(".galeria-grid:not(.hidden)").scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
 }
 
 function handleBigImg(e) {

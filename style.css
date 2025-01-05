@@ -347,7 +347,6 @@ footer {
   display: flex;
   flex-direction: column;
   max-width: 70%;
-  /* width: min-content; */
   margin: 0 auto;
   gap: 42px;
   padding: 24px 12px;
@@ -358,8 +357,7 @@ footer {
     flex: 1;
   }
 
-  li>img {
-    /* max-width: min(200px,664px/5); */
+  li img {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
@@ -370,7 +368,7 @@ footer {
     transition: all 250ms ease-in-out;
   }
 
-  li>span {
+  li span {
     position: absolute;
     top: 50%;
     display: block;
@@ -379,17 +377,30 @@ footer {
     font-weight: 700;
     font-size: 18px;
     z-index: 10;
+
+    animation-name: text-to-bottom-out;
+    animation-duration: 150ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
   }
 
   li:hover {
     cursor: pointer;
   }
 
-  li:hover>img {
+  li:hover img {
     opacity: 0.8;
     scale: 1.05;
   }
 
+  li:hover span {
+    padding: 8px;
+    font-size: 19px;
+    animation-name: text-to-bottom-in;
+    animation-duration: 150ms;
+    animation-fill-mode: forwards;
+    opacity: 0.9;
+  }
 }
 
 @media (min-width: 644px) {
@@ -398,24 +409,10 @@ footer {
     padding-block: 48px;
     max-width: 920px;
     justify-content: space-evenly;
-
-    li>span {
-      animation-name: text-to-bottom-out;
-      animation-duration: 150ms;
-    }
-
-    li:hover>span {
-      padding: 8px;
-      font-size: 19px;
-      animation-name: text-to-bottom-in;
-      animation-duration: 150ms;
-      animation-fill-mode: forwards;
-      opacity: 0.9;
-    }
   }
 }
 
-#categorias-galeria li.selected>span {
+#categorias-galeria li.selected span {
   padding: 8px;
   font-size: 19px;
   animation-name: text-to-bottom-in;
@@ -424,7 +421,7 @@ footer {
   opacity: 0.9;
 }
 
-#categorias-galeria li.selected>img {
+#categorias-galeria li.selected img {
   opacity: 0.8;
   scale: 1.05;
 }
@@ -441,9 +438,7 @@ footer {
   scale: 1;
 
   @starting-style {
-    /* <-- and this line */
     opacity: 0;
-
   }
 }
 
@@ -557,7 +552,6 @@ footer {
   opacity: 1;
 
   @starting-style {
-    /* <-- and this line */
     opacity: 0;
   }
 }
@@ -687,5 +681,4 @@ footer {
   animation-timing-function: ease-in;
   animation-duration: 350ms;
   animation-fill-mode: forwards;
-
 }
